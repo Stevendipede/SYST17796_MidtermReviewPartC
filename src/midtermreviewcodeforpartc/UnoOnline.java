@@ -43,6 +43,7 @@ public class UnoOnline
         System.out.println("please enter your desired user name:");
         String userName = sc.nextLine();
         boolean validPassword=false;
+        PasswordValidator validator = new PasswordValidator();
         String password="";
         while(!validPassword)
         {
@@ -53,17 +54,10 @@ public class UnoOnline
             password = sc.nextLine();
             int specialCharCount=0;
             //iterate over each character to see if it is a special character
-            for(int i=0;i<password.length(); i++)
-            {
-                if(!(Character.isLetterOrDigit(password.charAt(i))))
-                {
-                    //now we know there is at least one special character
-                    specialCharCount++;
-                }
-            }
-            if(specialCharCount>0 &&password.length()>7)
-            {
-                validPassword=true;
+            if (validator.isValid(password)) {
+                validPassword = true;
+            } else {
+                System.out.println("Invalid Password");
             }
         }//loop only ends when password is valid so now we create the User
         
